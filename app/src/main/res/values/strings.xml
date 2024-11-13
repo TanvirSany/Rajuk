@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Rajuk</string>
+    <string name="login">LOGIN</string>
+    <string name="enter_phone">Enter Phone Number</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="enter_number">Enter your phone number</string>
+    <string name="enter_nid">Enter your NID number</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="enter_register">Register</string>
+    <string name="plot_type">Select plot type</string>
+    <string name="complain"><b>Add your complain</b></string>
+    <string name="complain_list"><b>previous complain</b></string>
+    <string name="police_station">Select police station</string>
+    <string name="word_no">Enter word No</string>
+    <string name="road_no">Road No</string>
+    <string name="approval">Approval</string>
+    <string name="complain_details">Complain details</string>
+    <string name="submit_button">Submit</string>
+    <string name="house_no">House No/Holding No</string>
+    <string name="password">Enter Password</string>
+    <string name="signin">Sign In</string>
+    <string name="anonymously_signin">Sign In Anonymously</string>
+    <string name="login_page_intro">রাজউকে অভিযোগ করার জন্য লগইন করুন অথবা পরিচয় গোপন করে অভিযোগ করার জন্যে Sign in Anonymously -তে ক্লিক করুন।</string>
+    <string name="forgot_pass"><b>Forgot Password?</b></string>
+    <string name="sign_up"><b>Sign up</b></string>
+    <string name="user_signup">User Signup</string>
+    <string name="employee_signup">Employee Signup</string>
+
+
+</resources>
