@@ -97,33 +97,28 @@ class UserSignupActivity : AppCompatActivity() {
         userPassword: String,
         userImage: String
     ) {
-        val registerRequest =
-            RegisterRequest(userName, userPhoneNumber, userNidNumber, userPassword, userImage)
 
+        val registerRequest = RegisterRequest(userName, userPhoneNumber, userNidNumber, userPassword, userImage)
         val apiService = ApiClient.retrofit.create(ApiInterface::class.java)
 
         lifecycleScope.launch {
             try {
-                val response: Response<RegisterResponse> = apiService.register(registerRequest)
+                val response = apiService.register(registerRequest)
                 if (response.isSuccessful) {
                     val successResponse = response.body()
-                    if (successResponse != null) {
-                        Toast.makeText(this@UserSignupActivity, "Success", Toast.LENGTH_SHORT)
-                            .show()
-                    }
+                    Toast.makeText(this@UserSignupActivity, successResponse?.message ?: "Success", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(
-                        this@UserSignupActivity,
-                        response.errorBody().toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val errorBody = response.errorBody()?.string()
+                    Toast.makeText(this@UserSignupActivity, "Error: $errorBody", Toast.LENGTH_SHORT).show()
+                    Log.e( "here", errorBody.toString())
+                    if (response.code() == 422 && errorBody != null) {
 
+                    }
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@UserSignupActivity, "exception: " + e.message, Toast.LENGTH_SHORT).show()
-                Log.e("here", "submit: $e.message.toString()", )
+                Log.e( "Error during registration", e.message.toString())
+                Toast.makeText(this@UserSignupActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
