@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
@@ -25,8 +26,8 @@ import com.example.rajuk.Api.ApiClient
 import com.example.rajuk.Api.ApiInterface
 import com.example.rajuk.dataClass.RegisterRequest
 import com.example.rajuk.dataClass.RegisterResponse
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
-import retrofit2.Response
 import java.io.ByteArrayOutputStream
 
 class UserSignupActivity : AppCompatActivity() {
@@ -41,7 +42,7 @@ class UserSignupActivity : AppCompatActivity() {
 
     private val REQUEST_IMAGE_CAPTURE = 1
     private val CAMERA_PERMISSION_CODE = 100
-
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,17 +78,15 @@ class UserSignupActivity : AppCompatActivity() {
             submit(userName, userPhoneNumber, userNidNumber, userPassword, imageUri)
         }
 
-        image.setOnClickListener{
-            if(checkCameraPermission()){
+        image.setOnClickListener {
+            if (checkCameraPermission()) {
                 val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 takePictureLauncher.launch(takePictureIntent)
-            }else{
+            } else {
                 requestCameraPermission()
             }
         }
     }
-
-
 
 
     fun submit(
@@ -97,6 +96,7 @@ class UserSignupActivity : AppCompatActivity() {
         userPassword: String,
         userImage: String
     ) {
+        Log.e("here", "submit: " + userImage )
 
         val registerRequest = RegisterRequest(userName, userPhoneNumber, userNidNumber, userPassword, userImage)
         val apiService = ApiClient.retrofit.create(ApiInterface::class.java)
@@ -109,10 +109,18 @@ class UserSignupActivity : AppCompatActivity() {
                     Toast.makeText(this@UserSignupActivity, successResponse?.message ?: "Success", Toast.LENGTH_SHORT).show()
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    Toast.makeText(this@UserSignupActivity, "Error: $errorBody", Toast.LENGTH_SHORT).show()
-                    Log.e( "here", errorBody.toString())
-                    if (response.code() == 422 && errorBody != null) {
+                    Log.e("here", errorBody.toString())
 
+                    if (response.code() == 422 && errorBody != null) {
+                        val gson = Gson()
+                        val errorResponse = gson.fromJson(errorBody, RegisterResponse::class.java)
+
+                        errorResponse.errors?.name?.let { name.error = it.joinToString(", ") }
+                        errorResponse.errors?.phone?.let { phoneNumber.error = it.joinToString(", ") }
+                        errorResponse.errors?.nid?.let { nidNumber.error = it.joinToString(", ") }
+                        errorResponse.errors?.password?.let { password.error = it.joinToString(", ") }
+                    } else {
+                        Toast.makeText(this@UserSignupActivity, "Error: $errorBody", Toast.LENGTH_SHORT).show()
                     }
                 }
             } catch (e: Exception) {
@@ -124,38 +132,30 @@ class UserSignupActivity : AppCompatActivity() {
 
     private val takePictureLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            val imageBitmap = result.data?.extras?.getParcelable<Bitmap>("data") as? Bitmap
+            val imageBitmap = result.data?.extras?.get("data") as? Bitmap
             imageBitmap?.let {
                 image.setImageBitmap(it)
-                val base64String = bitmapToBase64(it)
-                imageUrl = base64String
+                val (base64String, format) = bitmapToBase64(it, Bitmap.CompressFormat.PNG, 80) // Get base64 and format
+                val mimeType = when (format) {
+                    Bitmap.CompressFormat.PNG -> "image/png"
+                    Bitmap.CompressFormat.JPEG -> "image/jpeg"
+                    else -> "image/*" // Default to generic image type
+                }
+                imageUrl = "data:$mimeType;base64,$base64String" // Construct Data URL
             }
         }
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode,
-//            data)
-//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-//            val imageBitmap = data?.extras?.get("data")
-//                    as Bitmap
-//            val base64String = bitmapToBase64(imageBitmap)
-//            imageUrl = base64String
-//        }
-//    }
-
-    private fun bitmapToBase64(bitmap: Bitmap): String {
+    private fun bitmapToBase64(bitmap: Bitmap, format: Bitmap.CompressFormat, quality: Int): Pair<String, Bitmap.CompressFormat> {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-
+        bitmap.compress(format, quality, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+        return Pair(Base64.encodeToString(byteArray, Base64.DEFAULT), format) // Return base64 and format
     }
 
 
     private fun checkCameraPermission(): Boolean {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-
     }
 
     private fun requestCameraPermission()
