@@ -6,3 +6,4 @@ data class ImageData(
     val imageView : ImageView,
     var imageUrl: String? = null
 )
+

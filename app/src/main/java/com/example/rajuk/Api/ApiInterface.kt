@@ -2,6 +2,8 @@ package com.example.rajuk.Api
 
 import ThanaResponse
 import com.example.rajuk.dataClass.CityCorporationResponse
+import com.example.rajuk.dataClass.ComplainRequest
+import com.example.rajuk.dataClass.ComplainResponse
 import com.example.rajuk.dataClass.EmployeeLoginRequest
 import com.example.rajuk.dataClass.RegisterRequest
 import com.example.rajuk.dataClass.RegisterResponse
@@ -10,6 +12,7 @@ import com.example.rajuk.dataClass.LoginResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ApiInterface {
@@ -28,4 +31,19 @@ interface ApiInterface {
 
     @GET("city-corporations")
     suspend fun cityCorporation() : Response<CityCorporationResponse>
+
+    @POST("complain/create")
+    suspend fun complain(
+        @Header("Authorization") token: String,
+        @Header("Content-Type") contentType : String,
+        @Header("Accept") accept : String,
+        @Body complainRequest: ComplainRequest) :
+            Response<ComplainResponse>
+
+    @POST("guest/complain/create")
+    suspend fun guestComplain(
+        @Header("Content-Type") contentType : String,
+        @Header("Accept") accept : String,
+        @Body complainRequest: ComplainRequest) :
+            Response<ComplainResponse>
 }

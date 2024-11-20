@@ -54,4 +54,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.runtime.ktx)
+
+    implementation(libs.play.services.location)
 }

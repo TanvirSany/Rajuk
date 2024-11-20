@@ -11,6 +11,7 @@ object ApiClient {
 
     val gson = GsonBuilder().serializeNulls().create()
 
+
     val retrofit : Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))

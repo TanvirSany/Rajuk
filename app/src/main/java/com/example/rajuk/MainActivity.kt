@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var password : EditText
     lateinit var rajukEmployeeSignin : TextView
     lateinit var sharedPreferences: SharedPreferences
+    lateinit var anonymousSignin : Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         phoneNumber = findViewById(R.id.EditTextLoginPhoneNumber)
         password = findViewById(R.id.EditTextLoginPassword)
         rajukEmployeeSignin = findViewById(R.id.textViewRajukEmployee)
+        anonymousSignin = findViewById(R.id.buttonAnonymousSignin)
 
 
         signUp.setOnClickListener {
@@ -63,6 +65,11 @@ class MainActivity : AppCompatActivity() {
 
         rajukEmployeeSignin.setOnClickListener {
             val intent = Intent(this@MainActivity, RajukEmployeeSigninActivity::class.java)
+            startActivity(intent)
+        }
+
+        anonymousSignin.setOnClickListener {
+            val intent = Intent(this@MainActivity, ComplainActivity::class.java)
             startActivity(intent)
         }
 

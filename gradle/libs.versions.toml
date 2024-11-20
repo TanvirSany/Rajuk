@@ -16,6 +16,7 @@ kotlinx-coroutines-android = "1.7.3"
 lifecycle-viewmodel-ktx = "2.8.7"
 lifecycle-runtime-ktx = "2.8.7"
 activityKtx = "1.10.0-alpha03"
+play-services-location = "21.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +33,8 @@ converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ve
 
 kotlinx-coroutines-core = {group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-core"}
 kotlinx-coroutines-android = {group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines-android"}
+
+play-services-location = {group = "com.google.android.gms", name = "play-services-location", version.ref = "play-services-location"}
 
 lifecycle-viewmodel-ktx = {group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx"}
 lifecycle-runtime-ktx = {group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx"}
