@@ -7,8 +7,9 @@
     <color name="logout_button_color">#a94c49</color>
     <color name="anonymous_button_color">#3b7c4e</color>
     <color name="hint_color">#777379</color>
-    <color name="card_color">#FFFFFFFF</color>
+    <color name="card_color">#6F787264</color>
 
-    <color name="default_day_night">#FF000000</color>
+    <color name="default_day_night">#FFFFFFFF</color>
+
 
 </resources>

@@ -22,9 +22,11 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:backgroundTint="@color/signin_button_color"
         android:text="@string/signin"
         app:layout_constraintEnd_toEndOf="@id/textView"
@@ -35,15 +37,13 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginTop="50dp"
         android:hint="@string/enter_phone"
         app:boxBackgroundMode="outline"
-        app:boxCornerRadiusBottomEnd="20dp"
-        app:boxCornerRadiusBottomStart="20dp"
-        app:boxCornerRadiusTopEnd="20dp"
-        app:boxCornerRadiusTopStart="20dp"
         app:layout_constraintEnd_toEndOf="@+id/textView6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/textView6"
@@ -53,20 +53,19 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/EditTextLoginPhoneNumber"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:singleLine="true"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:hint="@string/password"
-        app:boxCornerRadiusBottomEnd="20dp"
-        app:boxCornerRadiusBottomStart="20dp"
-        app:boxCornerRadiusTopEnd="20dp"
-        app:boxCornerRadiusTopStart="20dp"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout"
@@ -76,7 +75,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/EditTextLoginPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -142,9 +143,11 @@
 
     <Button
         android:id="@+id/buttonAnonymousSignin"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:backgroundTint="@color/signin_button_color"
         android:text="@string/anonymously_signin"
         app:layout_constraintEnd_toEndOf="@+id/textViewRajukEmployee"
@@ -153,9 +156,11 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:gravity="center"
         android:text="@string/login_page_intro"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"

@@ -29,14 +29,18 @@
     <string name="rajuk_employee">Rajuk employee?</string>
     <string name="employee_id">Employee ID</string>
     <string name="rajuk_employee_signin"><b>Signin Here</b></string>
-    
-    
+    <string name="address">Address</string>
+    <string name="details">Details</string>
+    <string name="status">Status</string>
+    <string name="your_previous_complain">Your Previous Complain</string>
+    <string name="logout">Logout</string>
+
+
     <string-array name="plot_type">
         <item>Residential</item>
         <item>Commercial</item>
         <item>Industrial</item>
     </string-array>
-
 
 
 </resources>

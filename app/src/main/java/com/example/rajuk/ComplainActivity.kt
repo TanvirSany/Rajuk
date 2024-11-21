@@ -158,20 +158,6 @@ class ComplainActivity : AppCompatActivity() {
             val inputLeftImage = imageDataList[3].imageUrl
             val inputApproval = approval.text.toString()
 
-            Log.e("rajuk", "onCreate:$inputPlotType ")
-            Log.e("rajuk", "onCreate:$inputHouseNo ")
-            Log.e("rajuk", "onCreate:$inputRoad ")
-            Log.e("rajuk", "onCreate:$inputCityCorporationId ")
-            Log.e("rajuk", "onCreate:$inputThanaId ")
-            Log.e("rajuk", "onCreate:$inputLat ")
-            Log.e("rajuk", "onCreate:$inputLon ")
-            Log.e("rajuk", "onCreate:$inputDetails ")
-            Log.e("rajuk", "onCreate:$inputFrontImage ")
-            Log.e("rajuk", "onCreate:$inputBackImage ")
-            Log.e("rajuk", "onCreate:$inputRightImage ")
-            Log.e("rajuk", "onCreate:$inputLeftImage ")
-            Log.e("rajuk", "onCreate:$inputApproval ")
-
 
         if (validateForm()){
 

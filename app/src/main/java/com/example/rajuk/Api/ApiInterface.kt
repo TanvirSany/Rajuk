@@ -2,6 +2,7 @@ package com.example.rajuk.Api
 
 import ThanaResponse
 import com.example.rajuk.dataClass.CityCorporationResponse
+import com.example.rajuk.dataClass.ComplainListResponse
 import com.example.rajuk.dataClass.ComplainRequest
 import com.example.rajuk.dataClass.ComplainResponse
 import com.example.rajuk.dataClass.EmployeeLoginRequest
@@ -46,4 +47,11 @@ interface ApiInterface {
         @Header("Accept") accept : String,
         @Body complainRequest: ComplainRequest) :
             Response<ComplainResponse>
+
+    @GET("complain/list")
+    suspend fun complainList(
+        @Header("Accept") accept : String,
+        @Header("Authorization") token: String ) : Response<ComplainListResponse>
+
+
 }
